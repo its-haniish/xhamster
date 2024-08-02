@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaHistory, FaBox, FaPlus, FaProductHunt, FaStar, FaTags, FaBars, FaTimes, FaSignOutAlt } from 'react-icons/fa';
+import { FaCreativeCommons, FaPlus, FaProductHunt, FaTags, FaBars, FaTimes, FaSignOutAlt } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -43,33 +43,20 @@ const Navbar = () => {
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:space-x-4">
                         <NavLink
-                            to="/orders"
-                            className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
-                        >
-                            <FaBox className="mr-2" />
-                            Orders
-                        </NavLink>
-                        <NavLink
-                            to="/add-product"
+                            to="/add-video"
                             className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
                         >
                             <FaPlus className="mr-2" />
-                            Add New Product
+                            Add Video
                         </NavLink>
                         <NavLink
-                            to="/all-products"
+                            to="/all-videos"
                             className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
                         >
                             <FaProductHunt className="mr-2" />
-                            All Products
+                            All Videos
                         </NavLink>
-                        <NavLink
-                            to="/featured-products"
-                            className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
-                        >
-                            <FaStar className="mr-2" />
-                            Featured Products
-                        </NavLink>
+
                         <NavLink
                             to="/manage-category"
                             className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
@@ -77,13 +64,15 @@ const Navbar = () => {
                             <FaTags className="mr-2" />
                             Manage Categories
                         </NavLink>
+
                         <NavLink
-                            to="/manage-brands"
+                            to="/manage-creators"
                             className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
                         >
-                            <FaTags className="mr-2" />
-                            Manage Brands
+                            <FaCreativeCommons className="mr-2" />
+                            Manage Creators
                         </NavLink>
+
                         <button
                             onClick={() => handleLogout(dispatch, navigate)}
                             className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
@@ -101,51 +90,41 @@ const Navbar = () => {
                 id="mobile-menu"
             >
                 <div className="space-y-1 px-2 pt-2 pb-3 bg-white">
+
                     <NavLink
-                        to="/orders"
-                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium flex items-center"
-                    >
-                        <FaBox className="mr-2" />
-                        Orders
-                    </NavLink>
-                    <NavLink
-                        to="/add-product"
-                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium flex items-center"
+                        to="/add-video"
+                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-base font-medium flex items-center"
                     >
                         <FaPlus className="mr-2" />
-                        Add New Product
+                        Add Video
                     </NavLink>
+
                     <NavLink
-                        to="/all-products"
-                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium flex items-center"
+                        to="/all-videos"
+                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-base font-medium flex items-center"
                     >
                         <FaProductHunt className="mr-2" />
-                        All Products
+                        All Videos
                     </NavLink>
-                    <NavLink
-                        to="/featured-products"
-                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium flex items-center"
-                    >
-                        <FaStar className="mr-2" />
-                        Featured Products
-                    </NavLink>
+
                     <NavLink
                         to="/manage-category"
-                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium flex items-center"
+                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-base font-medium flex items-center"
                     >
                         <FaTags className="mr-2" />
                         Manage Categories
                     </NavLink>
+
                     <NavLink
-                        to="/manage-brands"
-                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium flex items-center"
+                        to="/manage-creators"
+                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-base font-medium flex items-center"
                     >
-                        <FaTags className="mr-2" />
-                        Manage Brands
+                        <FaCreativeCommons className="mr-2" />
+                        Manage Creators
                     </NavLink>
                     <button
                         onClick={() => handleLogout(dispatch, navigate)}
-                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 block px-3 py-2 rounded-md text-base font-medium flex items-center"
+                        className="text-gray-900 hover:bg-gray-200 hover:text-gray-700  px-3 py-2 rounded-md text-base font-medium flex items-center"
                     >
                         <FaSignOutAlt className="mr-2" />
                         Logout

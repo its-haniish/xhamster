@@ -1,30 +1,25 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from './App'
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
 import Orders from "./pages/Orders";
 import AddProduct from "./pages/AddProduct";
 import AllProducts from "./pages/AllProducts";
 import EditProduct from "./pages/EditProducts";
 import FeaturedProducts from "./pages/FeaturedProducts";
 import ManageCategory from "./pages/ManageCategory";
-import ManageBrand from "./pages/ManageBrands";
+import ManageCreators from "./pages/ManageCreators";
 import ResetPassword from "./pages/ResetPassword";
+import Home from "./pages/Home";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />,
+        element: <Home />,
         errorElement: <NotFound />
     },
     {
         path: '/login',
         element: <Login />
-    },
-    {
-        path: '/signup',
-        element: <Signup />
     },
     {
         path: '/orders',
@@ -51,8 +46,8 @@ const router = createBrowserRouter([
         element: <ManageCategory />
     },
     {
-        path: '/manage-brands',
-        element: <ManageBrand />
+        path: '/manage-creators',
+        element: <ManageCreators />
     },
     {
         path: '/reset-password',
