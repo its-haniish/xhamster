@@ -3,12 +3,13 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Orders from "./pages/Orders";
 import AddVideo from "./pages/AddVideo";
-import AllProducts from "./pages/AllProducts";
+import AllVideos from "./pages/AllVideos";
 import EditProduct from "./pages/EditProducts";
 import FeaturedProducts from "./pages/FeaturedProducts";
 import Categories from "./pages/Categories";
 import Creators from "./pages/Creators";
 import Home from "./pages/Home";
+import UpdateVideo from "./pages/UpdateVideo";
 
 const router = createBrowserRouter([
     {
@@ -29,12 +30,12 @@ const router = createBrowserRouter([
         element: <AddVideo />
     },
     {
-        path: '/all-products',
-        element: <AllProducts />
+        path: '/all-videos',
+        element: <AllVideos />
     },
     {
-        path: '/edit-product/:id',
-        element: <EditProduct />
+        path: '/edit-video/:slug',
+        element: <UpdateVideo />
     },
     {
         path: '/featured-products',

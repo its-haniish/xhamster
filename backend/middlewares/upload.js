@@ -26,7 +26,8 @@ const fileFilter = (req, file, cb) => {
 // Set up the multer middleware
 const upload = multer({
     storage: storage,
-    fileFilter: fileFilter
+    fileFilter: fileFilter,
+    limits: { fileSize: 1024 * 1024 * 1024 * 2 }
 }).single('video'); // 'video' is the name of the form field
 
 module.exports = upload;

@@ -18,7 +18,27 @@ const Categories = () => {
 
 
     const handleDeleteCategory = async (id) => {
-        toast.success("Deleted Successfully", { duration: 1500 });
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BASE_URL}/delete-category`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id }),
+            });
+
+            const result = await response.json();
+            if (result.message !== 'Category deleted successfully') {
+                toast.error(result.message, { duration: 2000 });
+                return;
+            }
+
+            setCategories(categories.filter(creator => creator._id !== id));
+            toast.success("Deleted Successfully", { duration: 1500 });
+        } catch (error) {
+            console.log(error);
+            toast.error("Something went wrong", { duration: 1500 });
+        }
     };
 
     const onSave = async (name) => {

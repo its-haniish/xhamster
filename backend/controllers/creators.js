@@ -2,47 +2,56 @@ const Creators = require('../models/Creators');
 
 const getCreators = async (req, res) => {
     try {
-        const Creators = await Creators.find();
-        res.status(200).json({ message: 'Creators fetched successfully', data: Creators });
+        const creators = await Creators.find().sort({ createdAt: -1 });
+        res.status(200).json({ message: 'Creators fetched successfully', data: creators });
     } catch (err) {
+        console.error('Error fetching creators:', err.message);
         res.status(500).json({ message: err.message });
     }
 }
 
-const createCategory = async (req, res) => {
+const createCreator = async (req, res) => {
     const { name } = req.body;
-    const catName = name.toLowerCase();
+
+    console.log('Received request to create creator:', name);
+
     try {
-        const doesCategoryExist = await Creators.findOne({ name: catName });
-        if (doesCategoryExist) {
-            return res.status(400).json({ message: 'Category already exists' });
+        const doesCreatorExist = await Creators.findOne({ name });
+        if (doesCreatorExist) {
+            console.log('Creator already exists:', name);
+            return res.status(400).json({ message: 'Creator already exists' });
         }
-        const category = await Creators.create({ name: catName });
-        if (!category) {
-            return res.status(400).json({ message: 'Category could not be created' });
+
+        const creator = await Creators.create({ name });
+        if (!creator) {
+            console.log('Creator creation failed for:', name);
+            return res.status(400).json({ message: 'Creator could not be created' });
         }
-        res.status(201).json({ message: 'Category created successfully' });
+
+        console.log('Creator created successfully:', name);
+        res.status(201).json({ message: 'Creator created successfully', data: creator });
     } catch (err) {
+        console.error('Error creating creator:', err.message);
         res.status(500).json({ message: err.message });
     }
 }
 
-const deleteCategory = async (req, res) => {
+
+const deleteCreator = async (req, res) => {
     const { id } = req.body;
     try {
-        const category = await Creators.findByIdAndDelete(id);
-        if (!category) {
-            return res.status(404).json({ message: 'Category not found' });
+        const creator = await Creators.findByIdAndDelete(id);
+        if (!creator) {
+            return res.status(404).json({ message: 'Creator not found' });
         }
-        res.status(200).json({ message: 'Category deleted successfully' });
+        res.status(200).json({ message: 'Creator deleted successfully' });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
 }
-
 
 module.exports = {
     getCreators,
-    createCategory,
-    deleteCategory
+    createCreator,
+    deleteCreator
 };

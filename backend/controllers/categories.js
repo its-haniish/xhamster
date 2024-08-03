@@ -14,54 +14,26 @@ const getCategories = async (req, res) => {
 
 const createCategory = async (req, res) => {
     const { name } = req.body;
-    const catName = name.toLowerCase();
 
     console.log('Received request to create category:', name);
 
     try {
-        const doesCategoryExist = await Categories.findOne({ name: catName });
+        const doesCategoryExist = await Categories.findOne({ name });
         if (doesCategoryExist) {
-            console.log('Category already exists:', catName);
+            console.log('Category already exists:', name);
             return res.status(400).json({ message: 'Category already exists' });
         }
 
-        const category = await Categories.create({ name: catName });
+        const category = await Categories.create({ name });
         if (!category) {
-            console.log('Category creation failed for:', catName);
+            console.log('Category creation failed for:', name);
             return res.status(400).json({ message: 'Category could not be created' });
         }
 
-        console.log('Category created successfully:', catName);
+        console.log('Category created successfully:', name);
         res.status(201).json({ message: 'Category created successfully', data: category });
     } catch (err) {
         console.error('Error creating category:', err.message);
-        res.status(500).json({ message: err.message });
-    }
-}
-
-const updateCategory = async (req, res) => {
-    const { id, name } = req.body;
-    const catName = name.toLowerCase();
-
-    console.log('Received request to update category:', name);
-
-    try {
-        const doesCategoryExist = await Categories.findOne({ name: catName });
-        if (doesCategoryExist) {
-            console.log('Category already exists:', catName);
-            return res.status(400).json({ message: 'Category already exists' });
-        }
-
-        const category = await Categories.findByIdAndUpdate(id, { name: catName }, { new: true });
-        if (!category) {
-            console.log('Category update failed for:', catName);
-            return res.status(400).json({ message: 'Category could not be updated' });
-        }
-
-        console.log('Category updated successfully:', catName);
-        res.status(201).json({ message: 'Category updated successfully', data: category });
-    } catch (err) {
-        console.error('Error updating category:', err.message);
         res.status(500).json({ message: err.message });
     }
 }
@@ -85,5 +57,4 @@ module.exports = {
     getCategories,
     createCategory,
     deleteCategory,
-    updateCategory
 };

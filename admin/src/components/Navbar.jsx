@@ -13,7 +13,7 @@ const Navbar = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-    const handleLogout = (dispatch, navigate) => {
+    const handleLogout = () => {
         dispatch({ type: 'logout' });
         removeCookie('xHamsterAdmin');
         navigate('/login');
