@@ -29,13 +29,13 @@ const messagesAndButtons = [
     {
         message: "Manage your video categories effectively.",
         buttonText: "Manage Categories",
-        buttonLink: "/manage-categories",
+        buttonLink: "/categories",
         buttonColor: "bg-purple-600"
     },
     {
         message: "Organize and update your creators here.",
         buttonText: "Manage Creators",
-        buttonLink: "/manage-creators",
+        buttonLink: "/creators",
         buttonColor: "bg-teal-600"
     }
 ];
