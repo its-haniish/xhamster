@@ -2,7 +2,7 @@ const Users = require('../models/Users');
 const bcrypt = require('bcryptjs');
 
 const signup = async (req, res) => {
-    const { email, password, name, } = req.body;
+    const { email, password, name } = req.body;
     try {
 
         const userCreated = await Users.create({ name, email, password });

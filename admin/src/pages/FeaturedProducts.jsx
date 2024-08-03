@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { FaArrowLeft, FaStar } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
-import Loading from '../components/Loading';
-import LoadingMore from '../components/LoadingMore';
+import { LoadingMore, Loading } from '../components/Loading';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

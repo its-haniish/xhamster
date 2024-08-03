@@ -3,7 +3,9 @@ import Navbar from '../components/Navbar';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Loading from '../components/Loading';
+import { Loading } from '../components/Loading';
+import { getCookie } from '../utils/cookies';
+
 
 const messagesAndButtons = [
     {
@@ -42,13 +44,28 @@ const Home = () => {
     const randomIndex = Math.floor(Math.random() * messagesAndButtons.length);
     const { message, buttonText, buttonLink, buttonColor } = messagesAndButtons[randomIndex];
     const [isLoading, setIsLoading] = useState(false);
-    const { isAuthenticated } = useSelector(state => state.auth);
+    const { isAuth } = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const autoLogin = async () => {
+        const savedInfo = JSON.parse(getCookie('xHamsterAdmin'));
+        if (!savedInfo) {
+            navigate('/login');
+            return;
+        }
+        const { username, password } = savedInfo;
+        if (username === process.env.REACT_APP_BASE_USERNAME && password === process.env.REACT_APP_BASE_PASSWORD) {
+            dispatch({ type: 'login' });
+            navigate('/');
+        } else {
+            navigate('/login');
+        }
+    };
+
     useEffect(() => {
-        if (!isAuthenticated) {
-            //   autoLogin(dispatch, navigate, setIsLoading);
+        if (!isAuth) {
+            autoLogin();
         }
     }, [])
     return (

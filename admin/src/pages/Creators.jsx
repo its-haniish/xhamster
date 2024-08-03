@@ -2,13 +2,13 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { FaPlus, FaTrash, FaEdit } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import ManageCreatorsPopup from '../components/ManageCreatorsPopup';
-import Loading from '../components/Loading';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import LoadingMore from '../components/LoadingMore';
+import { Loading } from '../components/Loading';
+
 import { toast } from 'sonner';
 
-const ManageCreators = () => {
+const Creators = () => {
     const [brands, setBrands] = useState([
         { _d: '1', name: 'Creator 1' },
         { _d: '2', name: 'Creator 2' },
@@ -28,73 +28,11 @@ const ManageCreators = () => {
     const { isAuthenticated, token } = useSelector(state => state.auth);
     const navigate = useNavigate();
 
-    // const fetchAllBrands = useCallback(async () => {
-    //     if (isLoading || isMoreLoading || !hasMore) return;
-
-    //     if (page === 1) {
-    //         setIsLoading(true);
-    //     } else {
-    //         setIsMoreLoading(true);
-    //     }
-
-    //     try {
-    //         const response = await fetch(`${process.env.REACT_APP_BASE_URL}/fetch-all-brands`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Authorization': `Bearer ${token}`,
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({ page })
-    //         });
-
-    //         const result = await response.json();
-
-    //         if (result?.message === 'Brands fetched successfully') {
-    //             if (result.data.length === 0) {
-    //                 setHasMore(false);
-    //             } else {
-    //                 setBrands(prevBrands => [...prevBrands, ...result.data]);
-    //                 if (result.data.length < 5) {
-    //                     setHasMore(false);
-    //                 } else {
-    //                     setPage(prevPage => prevPage + 1);
-    //                 }
-    //             }
-    //         } else {
-    //             alert('Failed to fetch brands');
-    //         }
-    //     } catch (error) {
-    //         console.error('Error fetching brands:', error);
-    //         alert('Failed to fetch brands');
-    //     } finally {
-    //         setIsLoading(false);
-    //         setIsMoreLoading(false);
-    //     }
-    // }, [page, token, isLoading, isMoreLoading, hasMore,]);
 
 
     const handleDeleteBrand = async (id) => {
         toast.success("Deleted Successfully", { duration: 1500 });
     };
-
-    // const handleScroll = useCallback(() => {
-    //     const bottom = Math.ceil(window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight;
-    //     if (bottom && hasMore && !isMoreLoading && !isLoading) {
-    //         fetchAllBrands();
-    //     }
-    // }, [hasMore, isMoreLoading, isLoading, fetchAllBrands]);
-
-    // useEffect(() => {
-    //     if (!isAuthenticated) {
-    //         navigate('/');
-    //     } else {
-    //         fetchAllBrands();
-    //         window.addEventListener('scroll', handleScroll);
-    //     }
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, [isAuthenticated, navigate, fetchAllBrands, handleScroll]);
 
     return (
         <>
@@ -113,7 +51,7 @@ const ManageCreators = () => {
                 <div className="bg-white shadow-md rounded-lg p-6">
                     <ul className="space-y-4">
                         {brands.map((brand) => (
-                            <li key={brand._id} className="flex flex-col md:flex-row items-start md:items-center p-4 border border-gray-300 rounded-md">
+                            <li key={brand._d} className="flex flex-col md:flex-row items-start md:items-center p-4 border border-gray-300 rounded-md">
 
                                 <div className="flex-1 md:ml-4">
                                     <h2 className="text-lg font-semibold text-gray-900">{brand.name}</h2>
@@ -129,7 +67,6 @@ const ManageCreators = () => {
                             </li>
                         ))}
                     </ul>
-                    {isMoreLoading && hasMore && <LoadingMore />}
                 </div>
             </div>
             {isPopupOpen && (
@@ -141,4 +78,4 @@ const ManageCreators = () => {
     );
 };
 
-export default ManageCreators;
+export default Creators;

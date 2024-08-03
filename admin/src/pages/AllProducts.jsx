@@ -2,8 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { FaStar, FaEye } from 'react-icons/fa'; // Importing icons from react-icons
 import Navbar from '../components/Navbar';
-import Loading from '../components/Loading';
-import LoadingMore from '../components/LoadingMore';
+import { LoadingMore, Loading } from '../components/Loading';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 

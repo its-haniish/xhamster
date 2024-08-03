@@ -1,36 +1,27 @@
 import React, { useState } from 'react';
-const ManageCategoryPopup = ({ onClose }) => {
-    const [formData, setFormData] = useState({
-        name: ''
-    });
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
+const Popup = ({ title, onClose, onSave }) => {
+    const [name, setName] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
-
+        onSave(name);
     };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
             <div className="bg-white p-6 rounded-lg shadow-lg max-w-xs sm:max-w-md md:max-w-lg w-full">
                 <h2 className="text-xl font-semibold mb-4 text-center">
-                    Add Category
+                    Add {title}
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Category Name</label>
+                        <label htmlFor="name" className="block text-sm font-medium text-gray-700">{title} Name</label>
                         <input
                             type="text"
                             id="name"
                             name="name"
-                            value={formData.name}
-                            onChange={handleInputChange}
+                            value={name}
+                            onChange={e => setName(e.target.value)}
                             className="w-full px-3 py-2 mt-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required
                         />
@@ -49,7 +40,7 @@ const ManageCategoryPopup = ({ onClose }) => {
                             type="submit"
                             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none"
                         >
-                            Add Category
+                            Save
                         </button>
                     </div>
                 </form>
@@ -58,4 +49,4 @@ const ManageCategoryPopup = ({ onClose }) => {
     );
 };
 
-export default ManageCategoryPopup;
+export default Popup;

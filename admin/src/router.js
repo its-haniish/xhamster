@@ -2,13 +2,12 @@ import { createBrowserRouter } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Orders from "./pages/Orders";
-import AddProduct from "./pages/AddProduct";
+import AddVideo from "./pages/AddVideo";
 import AllProducts from "./pages/AllProducts";
 import EditProduct from "./pages/EditProducts";
 import FeaturedProducts from "./pages/FeaturedProducts";
-import ManageCategory from "./pages/ManageCategory";
-import ManageCreators from "./pages/ManageCreators";
-import ResetPassword from "./pages/ResetPassword";
+import Categories from "./pages/Categories";
+import Creators from "./pages/Creators";
 import Home from "./pages/Home";
 
 const router = createBrowserRouter([
@@ -26,8 +25,8 @@ const router = createBrowserRouter([
         element: <Orders />
     },
     {
-        path: '/add-product',
-        element: <AddProduct />
+        path: '/add-video',
+        element: <AddVideo />
     },
     {
         path: '/all-products',
@@ -42,16 +41,12 @@ const router = createBrowserRouter([
         element: <FeaturedProducts />
     },
     {
-        path: '/manage-category',
-        element: <ManageCategory />
+        path: '/categories',
+        element: <Categories />
     },
     {
-        path: '/manage-creators',
-        element: <ManageCreators />
-    },
-    {
-        path: '/reset-password',
-        element: <ResetPassword />
+        path: '/creators',
+        element: <Creators />
     }
 ]);
 

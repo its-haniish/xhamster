@@ -3,7 +3,7 @@ import { FaCreativeCommons, FaPlus, FaProductHunt, FaTags, FaBars, FaTimes, FaSi
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { handleLogout } from '../utils/handleAuth';
+import { removeCookie } from '../utils/cookies';
 
 const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -13,7 +13,11 @@ const Navbar = () => {
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
-
+    const handleLogout = (dispatch, navigate) => {
+        dispatch({ type: 'logout' });
+        removeCookie('xHamsterAdmin');
+        navigate('/login');
+    };
     return (
         <nav className="bg-white text-gray-900 shadow-md">
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -21,7 +25,7 @@ const Navbar = () => {
                     <div className="flex-1 flex items-center justify-start">
                         <div className="flex-shrink-0">
                             <NavLink to="/" className="text-2xl font-bold text-gray-900">
-                                Drink Bihar
+                                xHamster
                             </NavLink>
                         </div>
                     </div>
@@ -58,23 +62,23 @@ const Navbar = () => {
                         </NavLink>
 
                         <NavLink
-                            to="/manage-category"
+                            to="/categories"
                             className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
                         >
                             <FaTags className="mr-2" />
-                            Manage Categories
+                            Categories
                         </NavLink>
 
                         <NavLink
-                            to="/manage-creators"
+                            to="/creators"
                             className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
                         >
                             <FaCreativeCommons className="mr-2" />
-                            Manage Creators
+                            Creators
                         </NavLink>
 
                         <button
-                            onClick={() => handleLogout(dispatch, navigate)}
+                            onClick={handleLogout}
                             className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium flex items-center"
                         >
                             <FaSignOutAlt className="mr-2" />
@@ -108,22 +112,22 @@ const Navbar = () => {
                     </NavLink>
 
                     <NavLink
-                        to="/manage-category"
+                        to="/categories"
                         className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-base font-medium flex items-center"
                     >
                         <FaTags className="mr-2" />
-                        Manage Categories
+                        Categories
                     </NavLink>
 
                     <NavLink
-                        to="/manage-creators"
+                        to="/creators"
                         className="text-gray-900 hover:bg-gray-200 hover:text-gray-700 px-3 py-2 rounded-md text-base font-medium flex items-center"
                     >
                         <FaCreativeCommons className="mr-2" />
-                        Manage Creators
+                        Creators
                     </NavLink>
                     <button
-                        onClick={() => handleLogout(dispatch, navigate)}
+                        onClick={handleLogout}
                         className="text-gray-900 hover:bg-gray-200 hover:text-gray-700  px-3 py-2 rounded-md text-base font-medium flex items-center"
                     >
                         <FaSignOutAlt className="mr-2" />

@@ -18,6 +18,13 @@ const {
     getAllVideos
 } = require('../controllers/video.js');
 
+const {
+    getCategories,
+    createCategory,
+    deleteCategory,
+    updateCategory
+} = require('../controllers/categories.js');
+
 const authenticateToken = require('../middlewares/authenticateToken');
 
 routes
@@ -29,8 +36,14 @@ routes
     .post('/send-email', sendEmail)
 
     // video routes
-    .post('/upload-video', authenticateToken, uploadVideo)
-    .post('/delete-video', authenticateToken, deleteVideo)
-    .get('/videos', getAllVideos);
+    .post('/upload-video', uploadVideo)
+    .post('/delete-video', deleteVideo)
+    .get('/videos', getAllVideos)
+
+    // category routes
+    .post('/get-categories', getCategories)
+    .post('/create-category', createCategory)
+    .post('/delete-category', deleteCategory)
+    .post('/update-category', updateCategory)
 
 module.exports = routes;
