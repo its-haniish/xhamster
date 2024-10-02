@@ -37,7 +37,7 @@ const uploadVideo = async (req, res) => {
             return res.status(400).json({ message: err.message });
         }
 
-        const { title, description, slug, creator, category } = req.body;
+        const { title, description, slug, creator, category, thumbnail, time, views } = req.body;
         const url = `${slug}.mp4`;
 
         try {
