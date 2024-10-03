@@ -9,11 +9,15 @@ import { LuHeartHandshake } from "react-icons/lu";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import Sidebar from './Sidebar';
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+
 
 const Navbar = () => {
     const [showSidebar, setShowSidebar] = useState(false);
-    const [showSearchBar, setShowSearchBar] = useState(true); // Start with search bar hidden
-
+    const [showSearchBar, setShowSearchBar] = useState(false);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isMobile = useIsMobile();
 
     // Function to handle search bar toggle
@@ -22,7 +26,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="w-full text-white relative">
+        <nav className="w-full text-white relative z-[100]">
             {
                 isMobile ? (
                     <>
@@ -31,7 +35,9 @@ const Navbar = () => {
                             <Sidebar showSidebar={showSidebar} setShowSidebar={setShowSidebar} />
                         }
                         <div className="flex justify-between items-center px-2 py-1" >
-                            <img src="/logo.png" alt="Logo" className='w-40 cursor-pointer' />
+                            <img src="/logo.png" alt="Logo" className='w-40 cursor-pointer'
+                                onClick={() => navigate('/')}
+                            />
                             <ul className='flex justify-evenly w-40'>
                                 <li className='cursor-pointer'>
                                     <HiSearch
@@ -43,7 +49,10 @@ const Navbar = () => {
                                 <li className='cursor-pointer'>
                                     <RxAvatar size={25} color='white' />
                                 </li>
-                                <li className='cursor-pointer' onClick={() => setShowSidebar(true)}>
+                                <li className='cursor-pointer' onClick={() => {
+                                    dispatch({ type: 'open_sidebar' })
+                                    setShowSidebar(true)
+                                }}>
                                     <HiMenu size={26} color='white' />
                                 </li>
                             </ul>
@@ -53,15 +62,15 @@ const Navbar = () => {
                         {!showSearchBar ? (
                             <ul className='bg-black py-1 w-full flex gap-x-4 text-white overflow-x-auto whitespace-nowrap'>
                                 <li className='text-lg flex justify-center items-center gap-1 bg-black cursor-pointer'>
-                                    <GoDotFill color='red' size={15} />
+                                    <GoDotFill color='red' size={15} className='bg-black' />
                                     Live Sex
                                 </li>
                                 <li className='text-lg flex justify-center items-center gap-1 bg-black cursor-pointer'>
-                                    <FaCrown color='orange' size={20} />
+                                    <FaCrown color='orange' size={20} className='bg-black' />
                                     <span className='text-orange-400 bg-black'>Premium</span> Videos
                                 </li>
                                 <li className='text-lg flex justify-center items-center gap-1 bg-black cursor-pointer'>
-                                    <LuHeartHandshake color='pink' size={20} />
+                                    <LuHeartHandshake color='pink' size={20} className='bg-black' />
                                     Sex Chat
                                 </li>
                                 <li className='text-lg bg-black cursor-pointer'> Pornstars</li>
@@ -106,7 +115,9 @@ const Navbar = () => {
                     <>
                         <div className="flex justify-between items-center px-2 py-1">
                             {/* Logo */}
-                            <img src="/logo.png" alt="Logo" className='w-56 cursor-pointer' />
+                            <img src="/logo.png" alt="Logo" className='w-56 cursor-pointer'
+                                onClick={() => navigate('/')}
+                            />
 
                             {/* Search bar */}
                             <div className='flex justify-center items-center relative w-fit'>

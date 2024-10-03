@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import ReactPlayer from 'react-player';
+import React, { Suspense, lazy } from 'react';
+import useIsMobile from '../hooks/useIsMobile'; // Hook to check if the device is mobile or desktop
+import { useNavigate } from 'react-router-dom';
+const LazyImage = lazy(() => import('./LazyImage')); // Lazy-loaded image component
 
-const VideoCard = ({ url }) => {
-    const [duration, setDuration] = useState(0);
-
-    const handleDuration = (duration) => {
-        setDuration(duration);
-    };
+const VideoCard = ({ thumbnailUrl, length, slug }) => {
+    // Function to format the video length into minutes and seconds
+    const isMobile = useIsMobile();
+    const navigate = useNavigate();
 
     const formatDuration = (duration) => {
         const minutes = Math.floor(duration / 60);
@@ -15,25 +15,19 @@ const VideoCard = ({ url }) => {
     };
 
     return (
-        <section className='w-[45%] aspect-square bg-slate-100 relative border-none'>
-            <div className='w-full bg-cover bg-center relative aspect-square'>
-                <ReactPlayer
-                    url={"/song.mp4"}
-                    width='100%'
-                    height='100%'
-                    onDuration={handleDuration}
-                    light={true}  // This ensures that the video is not played, but a preview image is shown
-                    controls={false} // Hides video controls
-                    playing={false}  // Does not autoplay
-                />
+        <section onClick={() => navigate(`/play/${slug}`)} className={`${isMobile ? 'w-[48%]' : 'w-[20%]'} aspect-square bg-none relative border-none mt-2 cursor-pointer z-0`}>
+            <div className='w-full bg-cover bg-center relative aspect-square rounded-md'>
+                <Suspense fallback={<div className="bg-none w-full h-full rounded-md" />}>
+                    <LazyImage src={thumbnailUrl} alt="Video Thumbnail" />
+                </Suspense>
+                {/* Display the video length in the bottom-right corner */}
                 <p className='text-white absolute bottom-2 right-2 bg-black bg-opacity-50 px-2 py-1 rounded-md text-sm'>
-                    {formatDuration(duration)}
+                    {formatDuration(length)}
                 </p>
             </div>
             <h2 className='text-white whitespace-nowrap overflow-hidden text-ellipsis'>
                 This is the best video in the whole universe
             </h2>
-
             <h3 className='text-slate-500 font-medium text-sm'>5M views</h3>
         </section>
     );

@@ -6,34 +6,40 @@ import { RxAvatar } from "react-icons/rx";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { MdOutlineRssFeed, MdHistory } from 'react-icons/md';
 import { FaVideo, FaStar, FaCrown, FaTags, FaHeart, FaDownload } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
 
 
-const Sidebar = ({ showSidebar, setShowSidebar }) => {
+const Sidebar = ({ setShowSidebar }) => {
+    const dispatch = useDispatch();
     return (
-        <>
+        <aside className='z-50 overflow-hidden relative'>
+
             {/* Close Button with Animation */}
             <motion.div
                 initial={{ opacity: 0, x: -20 }}  // Button starts invisible and slightly offscreen to the left
                 animate={{ opacity: 1, x: 0 }}    // Fades in and moves to its normal position
                 exit={{ opacity: 0, x: -20 }}     // Fades out and moves left when closing
                 transition={{ type: "tween", duration: 0.3 }}  // Smooth transition
-                className='absolute left-16 top-2 cursor-pointer' // Removed bg-transparent
+                className=' left-16 top-2 cursor-pointer fixed rounded-full' // Adjust positioning as needed
             >
                 <IoClose
                     className='bg-transparent border border-white rounded-full p-1'
                     size={30}
-                    onClick={() => setShowSidebar(false)}
+                    onClick={() => {
+                        dispatch({ type: 'close_sidebar' });
+                        setShowSidebar(false);
+                    }}
                 />
             </motion.div>
 
 
             {/* Sidebar with Animation */}
-            <motion.aside
+            <motion.section
                 initial={{ x: '100%' }} // Start off-screen to the right
                 animate={{ x: 0 }} // Animate into view
                 exit={{ x: '100%' }} // Animate out of view when closing
                 transition={{ type: "tween", duration: 0.3 }} // Smooth transition
-                className='h-[100vh] w-[70vw] absolute right-0 top-0 bg-[#292828] shadow-lg p-3'
+                className='h-[100vh] w-[70vw] right-0 top-0 bg-[#292828] shadow-lg p-3 fixed'
             >
 
                 <ul className='flex rounded-2xl justify-evenly items-center'>
@@ -143,8 +149,8 @@ const Sidebar = ({ showSidebar, setShowSidebar }) => {
 
 
 
-            </motion.aside>
-        </>
+            </motion.section>
+        </aside>
     );
 };
 
