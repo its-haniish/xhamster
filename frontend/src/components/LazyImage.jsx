@@ -5,7 +5,7 @@ const LazyImage = ({ src, alt }) => {
         <img
             src={src}
             alt={alt}
-            className='w-full h-full object-cover'
+            className='w-full h-fit object-conatin rounded-md fliter blur-sm'
             loading="lazy" // Enables native lazy loading for the image
         />
     );

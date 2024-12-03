@@ -9,7 +9,7 @@ const router = createBrowserRouter([
         // errorElement: <NotFound />
     },
     {
-        path: '/play/:slug',
+        path: '/:slug',
         element: <Video />,
     }
 ]);

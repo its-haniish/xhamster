@@ -15,20 +15,23 @@ const VideoCard = ({ thumbnailUrl, length, slug }) => {
     };
 
     return (
-        <section onClick={() => navigate(`/play/${slug}`)} className={`${isMobile ? 'w-[48%]' : 'w-[20%]'} aspect-square bg-none relative border-none mt-2 cursor-pointer z-0`}>
-            <div className='w-full bg-cover bg-center relative aspect-square rounded-md'>
-                <Suspense fallback={<div className="bg-none w-full h-full rounded-md" />}>
-                    <LazyImage src={thumbnailUrl} alt="Video Thumbnail" />
+        <section onClick={() => navigate(`/${slug}`)} className={` ${isMobile ? 'w-[48%] h-[42vw]' : 'w-[20%] h-[16vw]'}  aspect-square bg-none relative border-none mt-2 cursor-pointer z-0`}>
+            <div className='w-full bg-cover bg-center relative aspect-video rounded-md'>
+                <Suspense fallback={<div className="bg-none rounded-md" />}>
+                    <LazyImage src={thumbnailUrl} alt={slug.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')} />
                 </Suspense>
                 {/* Display the video length in the bottom-right corner */}
-                <p className='text-white absolute bottom-2 right-2 bg-black bg-opacity-50 px-2 py-1 rounded-md text-sm'>
+                <p className='text-white absolute bottom-2 bg-black bg-opacity-50 px-2 py-1 rounded-md text-sm'>
                     {formatDuration(length)}
                 </p>
             </div>
             <h2 className='text-white whitespace-nowrap overflow-hidden text-ellipsis'>
-                This is the best video in the whole universe
+                {
+                    slug.split('-').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+                }
             </h2>
-            <h3 className='text-slate-500 font-medium text-sm'>5M views</h3>
+            <h3 className='text-slate-500 font-medium text-sm'>
+                {Math.floor(Math.random() * 10) + 1}M views</h3>
         </section>
     );
 };
